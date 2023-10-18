@@ -25,26 +25,26 @@ Les points clés :
 
 ## Comment lancer le projet ⚙️
 
-- Télécharger [le fichier ZIP du projet](https://github.com/CarolineLienard/webcomponents-lib/archive/refs/heads/main.zip)
+1. Télécharger [le fichier ZIP du projet](https://github.com/CarolineLienard/webcomponents-lib/archive/refs/heads/main.zip)
 
-- Dézipper le projet et ouvrir le dossier avec [votre éditeur de code](https://code.visualstudio.com/)
+2. Dézipper le projet et ouvrir le dossier avec [votre éditeur de code](https://code.visualstudio.com/)
 
-- Si vous ne savez pas utilisez un terminal et les lignes de commande, vous devez apprendre à [utiliser les lignes de commande](https://code.visualstudio.com/docs/terminal/basics) mais vous pouvez également envoyer un mail à carolinemrd@outlook.fr, le support sera ravi de vous venir en aide.
+3. Si vous ne savez pas utilisez un terminal et les lignes de commande, vous devez apprendre à [utiliser les lignes de commande](https://code.visualstudio.com/docs/terminal/basics) mais vous pouvez également envoyer un mail à carolinemrd@outlook.fr, le support sera ravi de vous venir en aide.
 
-- Ouvrir le terminal dans votre éditeur de code, vérifier que vous êtes bien dans le dossier du projet et lancer la commande : 
+4. Ouvrir le terminal dans votre éditeur de code, vérifier que vous êtes bien dans le dossier du projet et lancer la commande : 
 ```bash
 npm install
 ```
 
-- Une fois l'installation terminée, lancer la commande : 
+5. Une fois l'installation terminée, lancer la commande : 
 ```bash
 npm run dev
 ```
 
-- Félicitations, vous pouvez maintenant accéder au projet en local avec l'url : 
+6. Félicitations, vous pouvez maintenant accéder au projet en local avec l'url : 
 ```bash
 http://localhost:5173/
 ```
 
 ## Auteur ✒️
-- Caroline Lienard (https://github.com/CarolineLienard)
+- Caroline Lienard ( https://github.com/CarolineLienard )
