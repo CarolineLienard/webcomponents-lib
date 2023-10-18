@@ -1,5 +1,5 @@
 # Design System avec Web-components
-Dans ce projet, je créer une ébauche d'un design system avec web-components. C'est un premier essai et il pourra être amélioré avec d'avantage d'expérience sur cette technologie.
+Dans ce projet, je crée une ébauche d'un design system avec web-components. C'est un premier essai et il pourra être amélioré avec d'avantage d'expérience sur cette technologie.
 
 ## Challenge 🔨
 Il faut créer un petit design system en utilisant uniquement web-components. **Les frameworks JS comme React, Vue ou Angular ne sont pas autorisés.**
@@ -29,7 +29,7 @@ Les points clés :
 
 2. Dézipper le projet et ouvrir le dossier avec [votre éditeur de code](https://code.visualstudio.com/)
 
-3. Si vous ne savez pas utilisez un terminal et les lignes de commande, vous devez apprendre à [utiliser les lignes de commande](https://code.visualstudio.com/docs/terminal/basics) mais vous pouvez également envoyer un mail à carolinemrd@outlook.fr, le support sera ravi de vous venir en aide.
+3. Si vous ne savez pas utiliser un terminal et les lignes de commande, vous devez apprendre à [utiliser les lignes de commande](https://code.visualstudio.com/docs/terminal/basics) mais vous pouvez également envoyer un mail à carolinemrd@outlook.fr, le support sera ravi de vous venir en aide.
 
 4. Ouvrir le terminal dans votre éditeur de code, vérifier que vous êtes bien dans le dossier du projet et lancer la commande : 
 ```bash

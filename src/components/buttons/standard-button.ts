@@ -12,10 +12,10 @@ export class StandardButton extends LitElement {
 
   // Declare reactive properties
   @property()
-  name?: string = "world";
+  label?: string = "Button";
 
   // Render the UI as a function of component state
   render() {
-    return html`<p>Hello, ${this.name}!</p>`;
+    return html`<button>${this.label}</button>`;
   }
 }
