@@ -1,26 +1,52 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { colors } from "../../styles/colors.js";
 
 @customElement("standard-button")
 export class StandardButton extends LitElement {
-  // Define scoped styles right with your component, in plain CSS
+  // Component props
+  @property({ type: String }) backgroundColor =
+    colors.colorActionPrimaryBackgroundDefault;
+  @property({ type: String }) hoverColor =
+    colors.colorActionPrimaryBackgroundInteracting;
+  @property({ type: String }) label = "Button";
+  @property({ type: Boolean }) border = false;
+  @property({ type: Boolean }) disabled = false;
+
+  // Component style
   static styles = css`
     button {
-      background-color: #007acc;
+      background-color: var(--background-color);
       color: white;
+      font-size: 14px;
+      font-weight: 600;
       padding: 12px 16px;
-      border: none;
       border-radius: 8px;
+      border: var(--border);
+      letter-spacing: 0.02rem;
       cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: var(--hover-color);
     }
   `;
 
-  // Declare reactive properties
-  @property()
-  label?: string = "Button";
-
-  // Render the UI as a function of component state
-  render() {
-    return html`<button>${this.label}</button>`;
+  // Component render
+  protected render() {
+    return html`
+      <style>
+        :host {
+          --background-color: ${this.backgroundColor};
+          --hover-color: ${this.disabled
+            ? colors.colorGlobalAllDisabledSoft
+            : this.hoverColor};
+          --border: ${this.border
+            ? `1px solid ${this.backgroundColor}`
+            : "none"};
+        }
+      </style>
+      <button>${this.label}</button>
+    `;
   }
 }
