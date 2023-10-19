@@ -10,9 +10,17 @@
       type="module"
       src="./src/components/buttons/standard-button.ts"
     ></script>
+      <script
+      type="module"
+      src="./src/components/form/inputs/standard-input.ts"
+    ></script>
   </head>
   <body>
-    <standard-button label="Open Modal" onClick="testFunction()"></standard-button>
+    <standard-input></standard-input>
+    <standard-button
+      label="Open Modal"
+      onClick="testFunction()"
+    ></standard-button>
     <script>
       function testFunction() {
         alert("Click");

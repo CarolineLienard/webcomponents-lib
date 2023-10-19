@@ -21,7 +21,7 @@
 
 :root {
   /* Neutral */
-  --colorNeutralContentStrong: hsl(240 4% 32%);
+  --colorNeutralContentMedium: hsl(240 4% 32%);
   --colorNeutralContentStrong: hsl(240 5% 16%);
   --colorNeutralBorderMedium: hsl(240 20% 40% / 16%);
   --colorNeutralBackgroundStrong: hsl(0 0% 100%);
@@ -60,7 +60,8 @@
   /* Edition */
   --colorEditionContentDefault: hsl(240 6% 45%);
   --colorEditionContentInteracting: hsl(260 100% 62%);
-  --colorEditionBorderInteracting: hsl(240 30% 16% / 48%);
+  --colorEditionBorderDefault: hsl(240 30% 16% / 48%);
+  --colorEditionBorderLight: hsla(240, 30%, 16%, 0.48);
   --colorEditionBorderInteracting: hsl(260 100% 62%);
 }
 
