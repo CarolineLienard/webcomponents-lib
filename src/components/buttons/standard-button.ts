@@ -5,8 +5,13 @@ import { customElement, property } from "lit/decorators.js";
 export class StandardButton extends LitElement {
   // Define scoped styles right with your component, in plain CSS
   static styles = css`
-    :host {
-      color: red;
+    button {
+      background-color: #007acc;
+      color: white;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
   `;
 
