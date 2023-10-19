@@ -1,20 +1,10 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import "../../../styles/index.css";
 
 @customElement("standard-input")
 export class StandardInput extends LitElement {
   @property({ type: String }) label = "Label*";
   @property({ type: String }) placeholder = "Placeholder";
-
-  protected render() {
-    return html`
-      <div class="input-container">
-        <input id="input" placeholder="${this.placeholder}" />
-        <label for="input">${this.label}</label>
-      </div>
-    `;
-  }
 
   static styles = css`
     .input-container {
@@ -29,6 +19,8 @@ export class StandardInput extends LitElement {
       font-size: 16px;
       font-weight: 400;
       color: var(--colorNeutralContentStrong);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     input::placeholder {
@@ -45,4 +37,13 @@ export class StandardInput extends LitElement {
       color: var(--colorEditionContentDefault);
     }
   `;
+
+  protected render() {
+    return html`
+      <div class="input-container">
+        <input id="input" placeholder="${this.placeholder}" />
+        <label for="input">${this.label}</label>
+      </div>
+    `;
+  }
 }

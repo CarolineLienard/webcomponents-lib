@@ -43,11 +43,3 @@
   --colorEditionBorderLight: hsla(240, 30%, 16%, 0.48);
   --colorEditionBorderInteracting: hsl(260 100% 62%);
 }
-
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--colorNeutralBackgroundMedium);
-}

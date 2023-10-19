@@ -4,6 +4,7 @@ import { colors } from "../../styles/colors.js";
 
 @customElement("standard-button")
 export class StandardButton extends LitElement {
+  
   // Component props
   @property({ type: String }) backgroundColor =
     colors.colorActionPrimaryBackgroundDefault;
