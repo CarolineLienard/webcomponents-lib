@@ -10,27 +10,14 @@
     <title>Web-Components - Design System</title>
   </head>
   <body>
-    
-    <user-info-modal></user-info-modal>
-    <standard-button
-      id="open-modal-button"
-      label="Open Modal"
-    ></standard-button>
-
+    <open-modal></open-modal>
     <script
       type="module"
-      src="./design-system/components/buttons/standard-button.ts"
+      src="./design-system/components/modals/open-modal.ts"
     ></script>
     <script
       type="module"
-      src="./design-system/components/form/inputs/standard-input.ts"
+      src="./design-system//components/form/UserForm.ts"
     ></script>
-    <script
-      type="module"
-      src="./design-system/components/modals/modal-dialog.ts"
-    ></script>
-    <script type="module" src="./src/components/UserInfoModal.ts"></script>
-    <script src="./src/function/handleModal.js"></script>
-    <script src="./src/function/handleForm.js"></script>
   </body>
 </html>

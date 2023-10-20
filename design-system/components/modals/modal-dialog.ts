@@ -1,5 +1,7 @@
 import { LitElement, html, css } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
+import "../../../src/styles/index.css";
+import "../buttons/icon-button";
 
 @customElement("modal-dialog")
 export class ModalDialog extends LitElement {
@@ -22,21 +24,15 @@ export class ModalDialog extends LitElement {
       border-radius: 16px;
       width: 50%;
     }
-    .modal-title {
-    }
     .close-button {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start; /* Ajoutez cette ligne */
+      align-items: flex-start;
     }
   `;
 
-  closeModal() {
-    const modal = document.getElementById("my-modal");
-    if (modal) {
-      modal.style.visibility = "hidden";
-    }
-  }
+  @property({ type: String }) title = "Headline";
+  @property({ type: String }) subtitle = "Your text here";
 
   render() {
     return html`
@@ -44,17 +40,10 @@ export class ModalDialog extends LitElement {
         <div class="modal">
           <div class="modal-title">
             <div class="close-button">
-              <h1>Headline</h1>
-              <standard-button
-                @click=${this.closeModal}
-                label="X"
-              ></standard-button>
+              <h1>${this.title}</h1>
+              <icon-button></icon-button>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              eleifend magna eu libero mattis dictum. Donec maximus suscipit
-              ante, id eleifend nisi vulputate sed.
-            </p>
+            <p>${this.subtitle}</p>
           </div>
           <slot></slot>
         </div>
