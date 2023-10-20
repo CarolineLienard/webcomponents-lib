@@ -1,26 +1,23 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { colors } from "../../styles/colors.js";
-
 @customElement("outline-button")
 export class OutlineButton extends LitElement {
   // Component props
 
-  @property({ type: String }) outline = colors.colorActionPrimaryBackgroundDefault;
-
+  @property({ type: String }) color =
+    "var(--colorActionSecondaryBorderDefault)";
   @property({ type: String }) hoverColor =
-    colors.colorActionPrimaryBackgroundInteracting;
-
+    "var(--colorActionSecondaryBackgroundInteracting)";
   @property({ type: String }) label = "Button";
 
   @state()
-  _disabled = true;
+  _disabled = false;
 
   // Component style
   static styles = css`
     button {
       background-color: transparent;
-      color: red;
+      color: var(--font);
       font-size: 14px;
       font-weight: 600;
       padding: 12px 16px;
@@ -40,8 +37,11 @@ export class OutlineButton extends LitElement {
     return html`
       <style>
         :host {
-          --outline: ${this._disabled ? "red" : this.outline};
+          --outline: ${this._disabled ? "red" : this.color};
           --hover-color: ${this._disabled ? "lightGrey" : this.hoverColor};
+          --font: ${this._disabled
+            ? "var(--colorGlobalAllDisabledStrong)"
+            : "var(--colorActionSecondaryContentDefault)"};
         }
       </style>
       <button>${this.label}</button>

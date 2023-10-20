@@ -7,16 +7,26 @@ import "../buttons/outline-button";
 @customElement("user-form")
 export class UserModal extends LitElement {
   static styles = css`
+    .userFormContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
     .userForm {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
   `;
 
   render() {
     return html`
-      <div>
+      <div class="userFormContainer">
         <div class="userForm">
           <standard-input
             label="Name"
@@ -31,8 +41,10 @@ export class UserModal extends LitElement {
             placeholder="Example: 8"
           ></standard-input>
         </div>
-        <outline-button label="Cancel" id="cancel-button"></outline-button>
-        <standard-button id="close-modal-button" label="Send"></standard-button>
+        <div class="buttons">
+          <outline-button label="Cancel" id="cancel-button"></outline-button>
+          <standard-button id="close-modal-button" label="Send"></standard-button>
+        </div>
       </div>
     `;
   }

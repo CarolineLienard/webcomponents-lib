@@ -1,24 +1,23 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { colors } from "../../styles/colors.js";
 
 @customElement("standard-button")
 export class StandardButton extends LitElement {
   // Component props
   @property({ type: String }) color =
-    colors.colorActionPrimaryBackgroundDefault;
+    "var(--colorActionPrimaryBackgroundDefault)";
   @property({ type: String }) hoverColor =
-    colors.colorActionPrimaryBackgroundInteracting;
+    "var(--colorActionPrimaryBackgroundInteracting)";
   @property({ type: String }) label = "Button";
 
   @state()
-  _disabled = true;
+  _disabled = false;
 
   // Component style
   static styles = css`
     button {
       background-color: var(--color);
-      color: white;
+      color: var(--font);
       font-size: 14px;
       font-weight: 600;
       padding: 12px 16px;
@@ -39,8 +38,15 @@ export class StandardButton extends LitElement {
     return html`
       <style>
         :host {
-          --color: ${this._disabled ? "red" : this.color};
-          --hover-color: ${this._disabled ? "blue" : this.hoverColor};
+          --color: ${this._disabled
+            ? "var(--colorGlobalAllDisabledSoft)"
+            : this.color};
+          --hover-color: ${this._disabled
+            ? "var(--colorGlobalAllDisabledSoft)"
+            : this.hoverColor};
+          --font: ${this._disabled
+            ? "var(--colorGlobalAllDisabledStrong)"
+            : "var(--colorActionPrimaryContentDefault)"};
         }
       </style>
       <button>${this.label}</button>

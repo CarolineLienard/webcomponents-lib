@@ -51,3 +51,12 @@ body {
   align-items: center;
   background-color: var(--colorNeutralBackgroundMedium);
 }
+
+p {
+  color: var(--colorNeutralContentMedium);
+}
+
+h1 {
+  font-size: 18px;
+  color: red;
+}
