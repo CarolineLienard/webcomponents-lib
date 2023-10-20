@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import "../../../src/styles/index.css";
 import "../buttons/icon-button";
 
@@ -17,6 +17,7 @@ export class ModalDialog extends LitElement {
       justify-content: center;
       align-items: center;
       z-index: 1;
+      visibility: var(--open);
     }
     .modal {
       padding: 24px;
@@ -33,15 +34,29 @@ export class ModalDialog extends LitElement {
 
   @property({ type: String }) title = "Headline";
   @property({ type: String }) subtitle = "Your text here";
+  @property({ type: Boolean }) isOpen: boolean = false;
+
+  @state()
+  private _isOpen = this.isOpen;
+
+  _handleClose() {
+    this.isOpen = false;
+  }
 
   render() {
+    console.log(this.isOpen);
     return html`
+      <style>
+        :host {
+          --open: ${this.isOpen ? "visible" : "hidden"};
+        }
+      </style>
       <div class="modal-container">
         <div class="modal">
           <div class="modal-title">
             <div class="close-button">
               <h1>${this.title}</h1>
-              <icon-button></icon-button>
+              <icon-button @click="${this._handleClose}"></icon-button>
             </div>
             <p>${this.subtitle}</p>
           </div>

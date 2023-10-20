@@ -2,14 +2,16 @@ import { LitElement, html, css } from "lit";
 import { customElement, state, property } from "lit/decorators.js";
 import "../buttons/standard-button";
 import "../form/UserForm";
+import "../modals/modal-dialog";
 
 @customElement("open-modal")
 export class OpenModal extends LitElement {
-  @state()
-  _open = false;
+  
+  @state() private isOpen = false;
 
   _handleClick() {
-    this._open = true;
+    console.log("je me déclenche");
+    this.isOpen = true;
   }
 
   protected render() {
@@ -18,7 +20,9 @@ export class OpenModal extends LitElement {
         @click="${this._handleClick}"
         label="Open Modal"
       ></standard-button>
-      <user-info-modal ?isOpen=${this._open}></user-info-modal>
+      <modal-dialog ?isOpen=${this.isOpen}>
+        <user-form></user-form>
+      </modal-dialog>
     `;
   }
 }

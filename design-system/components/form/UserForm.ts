@@ -1,15 +1,12 @@
 import { LitElement, html, css } from "lit";
-import { customElement, state, property } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 import "../modals/modal-dialog";
 import "../form/inputs/standard-input";
 import "../buttons/outline-button";
 
-@customElement("user-info-modal")
+@customElement("user-form")
 export class UserModal extends LitElement {
   static styles = css`
-    .modal {
-      visibility: var(--open);
-    }
     .userForm {
       display: flex;
       flex-direction: column;
@@ -17,16 +14,9 @@ export class UserModal extends LitElement {
     }
   `;
 
-  @property({ type: Boolean }) isOpen: boolean = false;
-
   render() {
     return html`
-     <style>
-        :host {
-          --open : ${this.isOpen ? "visible" : "hidden"}
-        }
-      </style>
-      <modal-dialog class="modal" >
+      <div>
         <div class="userForm">
           <standard-input
             label="Name"
@@ -43,7 +33,7 @@ export class UserModal extends LitElement {
         </div>
         <outline-button label="Cancel" id="cancel-button"></outline-button>
         <standard-button id="close-modal-button" label="Send"></standard-button>
-      </modal-dialog>
+      </div>
     `;
   }
 }
