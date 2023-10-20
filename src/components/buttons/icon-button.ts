@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 
 @customElement("icon-button")
 export class IconButton extends LitElement {
@@ -26,11 +26,9 @@ export class IconButton extends LitElement {
   // Component render
   protected render() {
     return html`
-      <style>
-        :host {
-        }
-      </style>
-      <button>X</button>
+      <button>
+        <slot></slot>
+      </button>
     `;
   }
 }

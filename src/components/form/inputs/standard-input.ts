@@ -3,8 +3,9 @@ import { customElement, property } from "lit/decorators.js";
 
 @customElement("standard-input")
 export class StandardInput extends LitElement {
-  @property({ type: String }) label = "Label*";
+  @property({ type: String }) label = "Label";
   @property({ type: String }) placeholder = "Placeholder";
+  @property({ type: Boolean }) required = false;
 
   static styles = css`
     .input-container {
@@ -13,8 +14,8 @@ export class StandardInput extends LitElement {
 
     input {
       background-color: var(--colorNeutralBackgroundStrong);
-      padding: 21px 8px 6px 8px;
-      border: 1px solid var(--colorEditionBorderLight);
+      padding: 21.5px 8px 6px 8px;
+      border: 1px solid var(--colorEditionBorderDefault);
       border-radius: 8px;
       font-size: 16px;
       font-weight: 400;
@@ -27,11 +28,14 @@ export class StandardInput extends LitElement {
       color: var(--colorNeutralContentMedium);
     }
 
+    input:focus {
+      outline: 2px solid var(--colorGlobalBorderFocus);
+    }
+
     label {
       position: absolute;
-      top: 8px;
+      top: 7px;
       left: 8px;
-      color: #666;
       font-size: 14px;
       font-weight: 500;
       color: var(--colorEditionContentDefault);
@@ -42,7 +46,7 @@ export class StandardInput extends LitElement {
     return html`
       <div class="input-container">
         <input id="input" placeholder="${this.placeholder}" />
-        <label for="input">${this.label}</label>
+        <label for="input">${this.label}${this.required ? "*" : ""}</label>
       </div>
     `;
   }

@@ -9,6 +9,7 @@ export class StandardButton extends LitElement {
   @property({ type: String }) hoverColor =
     "var(--colorActionPrimaryBackgroundInteracting)";
   @property({ type: String }) label = "Button";
+  @property({ type: String }) icon = "sendIcon";
 
   @state()
   _disabled = false;
@@ -16,6 +17,9 @@ export class StandardButton extends LitElement {
   // Component style
   static styles = css`
     button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       background-color: var(--color);
       color: var(--font);
       font-size: 14px;
@@ -49,7 +53,11 @@ export class StandardButton extends LitElement {
             : "var(--colorActionPrimaryContentDefault)"};
         }
       </style>
-      <button>${this.label}</button>
+      <button>
+        <slot name="icon-left"></slot>
+        ${this.label}
+        <slot name="icon-right"></slot>
+      </button>
     `;
   }
 }

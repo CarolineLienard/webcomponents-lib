@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import "../buttons/icon-button";
+import "../icons/cross-icon";
 
 @customElement("modal-dialog")
 export class ModalDialog extends LitElement {
@@ -19,15 +20,37 @@ export class ModalDialog extends LitElement {
       visibility: var(--open);
     }
     .modal {
-      padding: 24px;
+      padding: 30px;
       background-color: white;
       border-radius: 16px;
-      width: 50%;
+      width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .modal-title {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
     .close-button {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      position: absolute;
+      left: 94%;
+      bottom: 75%;
+    }
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--colorNeutralContentStrong);
+      margin: 0;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--colorNeutralContentMedium);
+      margin: 0;
+      line-height: 24px;
     }
   `;
 
@@ -35,15 +58,11 @@ export class ModalDialog extends LitElement {
   @property({ type: String }) subtitle = "Your text here";
   @property({ type: Boolean }) isOpen: boolean = false;
 
-  @state()
-  private _isOpen = this.isOpen;
-
   _handleClose() {
-    this.isOpen = false;
+    this.dispatchEvent(new CustomEvent("handleClose"));
   }
 
   render() {
-    console.log(this.isOpen);
     return html`
       <style>
         :host {
@@ -54,9 +73,11 @@ export class ModalDialog extends LitElement {
         <div class="modal">
           <div class="modal-title">
             <div class="close-button">
-              <h1>${this.title}</h1>
-              <icon-button @click="${this._handleClose}"></icon-button>
+              <icon-button @click="${this._handleClose}">
+                <cross-icon size="small"></cross-icon>
+              </icon-button>
             </div>
+            <h1>${this.title}</h1>
             <p>${this.subtitle}</p>
           </div>
           <slot></slot>
