@@ -18,7 +18,3 @@
   src: url("../assets/fonts/inter/Inter\ SemiBold.woff2") format("woff2"),
     url("../assets/fonts/inter/Inter\ SemiBold.woff") format("woff");
 }
-
-* {
-  font-family: "Inter";
-}

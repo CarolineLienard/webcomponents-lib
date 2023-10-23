@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import "../../icons/check-icon";
 
 @customElement("standard-input")
 export class StandardInput extends LitElement {
@@ -14,7 +15,7 @@ export class StandardInput extends LitElement {
 
     input {
       background-color: var(--colorNeutralBackgroundStrong);
-      padding: 21.5px 8px 6px 8px;
+      padding: 21.5px 35px 6px 8px;
       border: 1px solid var(--colorEditionBorderDefault);
       border-radius: 8px;
       font-size: 16px;
@@ -40,6 +41,13 @@ export class StandardInput extends LitElement {
       font-weight: 500;
       color: var(--colorEditionContentDefault);
     }
+
+    .input-icon {
+      background-color: white;
+      position: absolute;
+      top: 15px;
+      right: 8px;
+    }
   `;
 
   protected render() {
@@ -47,6 +55,9 @@ export class StandardInput extends LitElement {
       <div class="input-container">
         <input id="input" placeholder="${this.placeholder}" />
         <label for="input">${this.label}${this.required ? "*" : ""}</label>
+        <div class="input-icon">
+          <check-icon slot="icon-right" size="small" color="red"></check-icon>
+        </div>
       </div>
     `;
   }
