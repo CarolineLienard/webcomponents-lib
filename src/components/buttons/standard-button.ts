@@ -33,6 +33,13 @@ export class StandardButton extends LitElement {
       background-color: var(--hover-color);
       border: 1px solid var(--hover-color);
     }
+    button:focus {
+      background-color: var(--hover-color);
+      outline: none;
+    }
+    button:disabled {
+      cursor: not-allowed;
+    }
   `;
 
   // Component render
@@ -40,7 +47,9 @@ export class StandardButton extends LitElement {
     return html`
       <style>
         :host {
-          --color: ${this.isDisabled ? "red" : this.color};
+          --color: ${this.isDisabled
+            ? "var(--colorGlobalAllDisabledSoft)"
+            : this.color};
           --hover-color: ${this.isDisabled
             ? "var(--colorGlobalAllDisabledSoft)"
             : this.hoverColor};

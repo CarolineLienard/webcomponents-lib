@@ -24,8 +24,6 @@ export class UserModal extends LitElement {
     }
   `;
 
-  @state() _isDisabled = true;
-
   @state() emailValue = "";
   @state() emailError = false;
   @state() emailErrorMessage = "";
@@ -65,7 +63,7 @@ export class UserModal extends LitElement {
         this.emailErrorMessage = "";
       } else {
         this.emailError = true;
-        this.emailErrorMessage = "Erreur dans l'email";
+        this.emailErrorMessage = "Veuillez choisir un email valide";
       }
     } else if (name === "firstName") {
       this.nameValue = value;
@@ -137,7 +135,11 @@ export class UserModal extends LitElement {
           <standard-button ?isDisabled=${this._handleDisabled()} type="submit "id="close-modal-button" label="Send" @click="${
       this._handleSubmit
     }">
-            <send-icon slot="icon-right"size="small" color="white"></send-icon>
+            <send-icon slot="icon-right" size="small" color=${
+              this._handleDisabled()
+                ? "var(--colorGlobalAllDisabledStrong)"
+                : "var(--colorActionPrimaryContentInteracting)"
+            }></send-icon>
           </standard-button>
         </div>
       </div>

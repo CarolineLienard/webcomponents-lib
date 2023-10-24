@@ -2,6 +2,7 @@ import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import "../buttons/icon-button";
 import "../icons/cross-icon";
+import "../tooltip/tooltip";
 
 @customElement("modal-dialog")
 export class ModalDialog extends LitElement {
@@ -72,11 +73,11 @@ export class ModalDialog extends LitElement {
       <div class="modal-container">
         <div class="modal">
           <div class="modal-title">
-            <div class="close-button">
+            <tooltip-component class="close-button" text="Close">
               <icon-button @click="${this._handleClose}">
                 <cross-icon size="small"></cross-icon>
               </icon-button>
-            </div>
+            </tooltip-component>
             <h1>${this.title}</h1>
             <p>${this.subtitle}</p>
           </div>

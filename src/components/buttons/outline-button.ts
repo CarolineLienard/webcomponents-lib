@@ -30,6 +30,11 @@ export class OutlineButton extends LitElement {
     button:hover {
       background-color: var(--hover-color);
     }
+    button:focus {
+      border: 1px solid var(--colorEditionBorderInteracting);
+      background-color: var(--hover-color);
+      outline: none;
+    }
   `;
 
   // Component render

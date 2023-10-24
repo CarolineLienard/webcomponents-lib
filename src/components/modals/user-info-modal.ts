@@ -6,7 +6,7 @@ import "../form/UserForm";
 
 @customElement("user-info-modal")
 export class UserInfoModal extends LitElement {
-  @state() isOpen: boolean = false;
+  @state() isOpen: boolean = true;
 
   _handleOpen() {
     this.isOpen = true;
@@ -23,7 +23,6 @@ export class UserInfoModal extends LitElement {
         label="Open Modal"
       ></standard-button>
       <modal-dialog
-        title="Modal"
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eleifend magna eu libero mattis dictum. Donec maximus suscipit ante, id eleifend nisi vulputate sed."
         ?isOpen=${this.isOpen}
         @handleClose="${this._handleClose}"

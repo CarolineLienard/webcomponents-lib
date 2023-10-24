@@ -9,7 +9,9 @@ export class CrossIcon extends LitElement {
 
   static styles = css`
     :host {
-      display: inline-block;
+      display: flex;
+      align-item: center;
+      justify-content: center;
     }
 
     svg {

@@ -9,6 +9,7 @@
   /* Status */
   --colorStatusContentSuccess: hsl(120 100% 25%);
   --colorStatusContentError: hsl(0 83% 46%);
+  --colorStatusBackgroundErrorAccent: hsla(0, 83%, 50%, 1);
 
   /* Global */
   --colorGlobalBorderFocus: hsl(210 100% 42%);
