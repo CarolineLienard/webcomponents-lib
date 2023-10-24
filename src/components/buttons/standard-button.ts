@@ -10,9 +10,7 @@ export class StandardButton extends LitElement {
     "var(--colorActionPrimaryBackgroundInteracting)";
   @property({ type: String }) label = "Button";
   @property({ type: String }) icon = "sendIcon";
-
-  @state()
-  _disabled = false;
+  @property({ type: Boolean }) isDisabled = false;
 
   // Component style
   static styles = css`
@@ -42,18 +40,16 @@ export class StandardButton extends LitElement {
     return html`
       <style>
         :host {
-          --color: ${this._disabled
-            ? "var(--colorGlobalAllDisabledSoft)"
-            : this.color};
-          --hover-color: ${this._disabled
+          --color: ${this.isDisabled ? "red" : this.color};
+          --hover-color: ${this.isDisabled
             ? "var(--colorGlobalAllDisabledSoft)"
             : this.hoverColor};
-          --font: ${this._disabled
+          --font: ${this.isDisabled
             ? "var(--colorGlobalAllDisabledStrong)"
             : "var(--colorActionPrimaryContentDefault)"};
         }
       </style>
-      <button>
+      <button ?disabled=${this.isDisabled}>
         <slot name="icon-left"></slot>
         ${this.label}
         <slot name="icon-right"></slot>

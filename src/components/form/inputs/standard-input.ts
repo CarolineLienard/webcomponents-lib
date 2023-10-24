@@ -1,12 +1,17 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import "../../icons/check-icon";
+import "../../icons/error-icon";
 
 @customElement("standard-input")
 export class StandardInput extends LitElement {
+  @property({ type: String }) name = "";
+  @property({ type: String }) value = "";
   @property({ type: String }) label = "Label";
   @property({ type: String }) placeholder = "Placeholder";
   @property({ type: Boolean }) required = false;
+  @property({ type: Boolean }) error = false;
+  @property({ type: String }) errorMessage = "";
 
   static styles = css`
     .input-container {
@@ -42,6 +47,14 @@ export class StandardInput extends LitElement {
       color: var(--colorEditionContentDefault);
     }
 
+    span {
+      font-size: 14px;
+      color: red;
+      font-weight: 400;
+      font-style: italic;
+      padding-top: 2rem;
+    }
+
     .input-icon {
       background-color: white;
       position: absolute;
@@ -50,14 +63,44 @@ export class StandardInput extends LitElement {
     }
   `;
 
+  inputHandler(event: any) {
+    this.dispatchEvent(
+      new CustomEvent("val-change", {
+        detail: { value: event.composedPath()[0].value, name: this.name },
+      })
+    );
+  }
+
+  checkTemplate() {
+    if (this.error && this.value.length > 0) {
+      return html`
+        <div class="input-icon">
+          <error-icon slot="icon-right" size="small" color="red"></error-icon>
+        </div>
+        <span>${this.errorMessage}</span>
+      `;
+    } else if (!this.error && this.value.length > 0) {
+      return html`
+        <div class="input-icon">
+          <check-icon slot="icon-right" size="small" color="green"></check-icon>
+        </div>
+      `;
+    } else {
+      return null;
+    }
+  }
+
   protected render() {
     return html`
       <div class="input-container">
-        <input id="input" placeholder="${this.placeholder}" />
+        <input
+          .name=${this.name}
+          @input=${this.inputHandler}
+          placeholder="${this.placeholder}"
+          .value=${this.value}
+        />
         <label for="input">${this.label}${this.required ? "*" : ""}</label>
-        <div class="input-icon">
-          <check-icon slot="icon-right" size="small" color="red"></check-icon>
-        </div>
+        ${this.checkTemplate()}
       </div>
     `;
   }
