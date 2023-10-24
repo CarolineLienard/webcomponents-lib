@@ -6,6 +6,10 @@ import "../tooltip/tooltip";
 
 @customElement("modal-dialog")
 export class ModalDialog extends LitElement {
+  @property({ type: String }) headline = "Headline";
+  @property({ type: String }) subtitle = "Your text here";
+  @property({ type: Boolean }) isOpen: boolean = false;
+
   static styles = css`
     .modal-container {
       position: fixed;
@@ -55,10 +59,6 @@ export class ModalDialog extends LitElement {
     }
   `;
 
-  @property({ type: String }) title = "Headline";
-  @property({ type: String }) subtitle = "Your text here";
-  @property({ type: Boolean }) isOpen: boolean = false;
-
   _handleClose() {
     this.dispatchEvent(new CustomEvent("handleClose"));
   }
@@ -78,7 +78,7 @@ export class ModalDialog extends LitElement {
                 <cross-icon size="small"></cross-icon>
               </icon-button>
             </tooltip-component>
-            <h1>${this.title}</h1>
+            <h1>${this.headline}</h1>
             <p>${this.subtitle}</p>
           </div>
           <slot></slot>

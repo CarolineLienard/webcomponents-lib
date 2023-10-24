@@ -4,8 +4,23 @@ import "../modals/modal-dialog";
 import "./inputs/standard-input";
 import "../buttons/outline-button";
 import "../icons/send-icon";
+
 @customElement("user-form")
-export class UserModal extends LitElement {
+export class UserForm extends LitElement {
+  @state() emailValue = "";
+  @state() emailError = false;
+  @state() emailErrorMessage = "";
+
+  @state() nameValue = "";
+  @state() nameError = false;
+  @state() nameErrorMessage = "";
+
+  @state() numberValue = "";
+  @state() numberError = false;
+  @state() numberErrorMessage = "";
+
+  @state() isSubmitted = false;
+
   static styles = css`
     .userFormContainer {
       display: flex;
@@ -24,40 +39,11 @@ export class UserModal extends LitElement {
     }
   `;
 
-  @state() emailValue = "";
-  @state() emailError = false;
-  @state() emailErrorMessage = "";
-
-  @state() nameValue = "";
-  @state() nameError = false;
-  @state() nameErrorMessage = "";
-
-  @state() numberValue = "";
-  @state() numberError = false;
-  @state() numberErrorMessage = "";
-
-  _handleCreateInput() {
-    const shadowRoot = this.shadowRoot;
-    if (shadowRoot) {
-      const inputs = shadowRoot.querySelectorAll("standard-input");
-
-      inputs.forEach((input) => {
-        input.addEventListener("val-change", () => {});
-      });
-    }
-  }
-
-  firstUpdated() {
-    this._handleCreateInput();
-  }
-
-  handleChange(e: any) {
+  handleChange(e: CustomEvent) {
     const { name, value } = e.detail;
     if (name === "email") {
       this.emailValue = value;
-
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
       if (emailRegex.test(value)) {
         this.emailError = false;
         this.emailErrorMessage = "";
@@ -66,32 +52,49 @@ export class UserModal extends LitElement {
         this.emailErrorMessage = "Veuillez choisir un email valide";
       }
     } else if (name === "firstName") {
+      const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]{3,}$/;
       this.nameValue = value;
+      if (nameRegex.test(value)) {
+        this.nameError = false;
+        this.nameErrorMessage = "";
+      } else {
+        this.nameError = true;
+        this.nameErrorMessage = "Veuillez choisir un nom valide";
+      }
     } else if (name === "number") {
       this.numberValue = value;
+      const numberRegex = /^[0-9]+$/;
+      if (this.numberValue.length === 0) {
+        this.numberError = false;
+      } else {
+        if (numberRegex.test(value)) {
+          this.numberError = false;
+          this.numberErrorMessage = "";
+        } else {
+          this.numberError = true;
+          this.numberErrorMessage = "Veuillez choisir un chiffre valide";
+        }
+      }
     }
   }
 
-  _handleSubmit() {
-    console.log(this.emailValue, this.nameValue, this.numberValue);
+  handleSubmit() {
+    this.handleClose();
+    this.isSubmitted = true;
   }
 
-  _handleClose() {
+  handleClose() {
     this.dispatchEvent(new CustomEvent("handleClose"));
   }
 
-  _handleDisabled() {
-    if (
+  handleDisabled() {
+    return !(
       this.emailValue.length > 0 &&
       !this.emailError &&
       this.nameValue.length > 0 &&
       !this.nameError &&
       !this.numberError
-    ) {
-      return false;
-    } else {
-      return true;
-    }
+    );
   }
 
   render() {
@@ -99,8 +102,10 @@ export class UserModal extends LitElement {
       <form class="userFormContainer">
         <div class="userForm">
           <standard-input
+            id="nameInput"
             name="firstName"
             label="Name"
+            type="text"
             placeholder="Example: John Doe"
             required
             @val-change="${this.handleChange}"
@@ -109,8 +114,10 @@ export class UserModal extends LitElement {
             ?error=${this.nameError}
           ></standard-input>
           <standard-input
+            id="email"
             name="email"
             label="Email"
+            type="text"
             placeholder="Example: john.doe@example.com"
             required
             @val-change="${this.handleChange}"
@@ -119,9 +126,11 @@ export class UserModal extends LitElement {
             ?error=${this.emailError}
           /></standard-input>
           <standard-input
+            id="numberInput"
             name="number"
             label="Favorite number"
             placeholder="Example: 8"
+            type="text"
             @val-change="${this.handleChange}"
             .value=${this.numberValue}
             .errorMessage=${this.numberErrorMessage}
@@ -130,18 +139,25 @@ export class UserModal extends LitElement {
         </div>
         <div class="buttons">
           <outline-button label="Cancel" id="cancel-button" @click="${
-            this._handleClose
+            this.handleClose
           }"></outline-button>
-          <standard-button ?isDisabled=${this._handleDisabled()} type="submit "id="close-modal-button" label="Send" @click="${
-      this._handleSubmit
+          <standard-button ?isDisabled=${this.handleDisabled()} type="submit" id="close-modal-button" label="Send" aria-label="Valider le formulaire" @click="${
+      this.handleSubmit
     }">
             <send-icon slot="icon-right" size="small" color=${
-              this._handleDisabled()
+              this.handleDisabled()
                 ? "var(--colorGlobalAllDisabledStrong)"
                 : "var(--colorActionPrimaryContentInteracting)"
             }></send-icon>
           </standard-button>
         </div>
+        <modal-dialog title="Merci pour votre inscription ${
+          this.nameValue
+        }" subtitle="un email de confirmation a été envoyé à ${
+      this.emailValue
+    }" ?isOpen=${this.isSubmitted}>
+          <outline-button label="Cancel" aria-label="Cancel form"></outline-button>
+        </modal-dialog>
       </div>
     `;
   }

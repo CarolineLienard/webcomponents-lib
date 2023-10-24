@@ -1,11 +1,5 @@
-import {
-  LitElement,
-  html,
-  css,
-  property,
-  customElement,
-  state,
-} from "lit-element";
+import { LitElement, html, css } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
 
 @customElement("tooltip-component")
 export class TooltipComponent extends LitElement {
@@ -14,8 +8,8 @@ export class TooltipComponent extends LitElement {
 
   static styles = css`
     :host {
-      position: relative;
       display: inline-block;
+      position: relative;
     }
 
     .tooltip {
@@ -34,9 +28,9 @@ export class TooltipComponent extends LitElement {
     }
   `;
 
-  toggleTooltip() {
+  toggleTooltip = () => {
     this.showTooltip = !this.showTooltip;
-  }
+  };
 
   render() {
     return html`

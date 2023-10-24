@@ -14,50 +14,61 @@ export class StandardInput extends LitElement {
   @property({ type: String }) errorMessage = "";
 
   static styles = css`
+    :host {
+      --input-background-color: var(--colorNeutralBackgroundStrong);
+      --input-border: var(--border);
+      --input-color: var(--colorNeutralContentStrong);
+      --input-placeholder-color: var(--colorNeutralContentMedium);
+      --input-focus-border: var(--interactingBorder);
+      --label-color: var(--label);
+      --error-color: var(--colorStatusContentError);
+    }
+
     .input-container {
       position: relative;
     }
 
     input {
-      background-color: var(--colorNeutralBackgroundStrong);
+      background-color: var(--input-background-color);
       padding: 21.5px 35px 6px 8px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--input-border);
       border-radius: 8px;
       font-size: 16px;
       font-weight: 400;
-      color: var(--colorNeutralContentStrong);
+      color: var(--input-color);
       width: 100%;
       box-sizing: border-box;
     }
 
     input::placeholder {
-      color: var(--colorNeutralContentMedium);
+      color: var(--input-placeholder-color);
     }
 
     input:focus,
     input:hover {
-      border: 1px solid var(--interactingBorder);
+      border: 1px solid var(--input-focus-border);
       outline: none;
     }
 
     label {
+      font-family: "Inter";
       position: absolute;
       top: 7px;
       left: 8px;
       font-size: 14px;
       font-weight: 500;
-      color: var(--label);
+      color: var(--label-color);
     }
 
     input:focus + label,
     input:hover + label {
-      color: var(--interactingBorder);
+      color: var(--input-focus-border);
     }
 
     span {
       display: block;
       font-size: 14px;
-      color: var(--colorStatusContentError);
+      color: var(--error-color);
       font-weight: 400;
       font-style: italic;
       margin: 0.4rem 0.2rem;
@@ -71,56 +82,63 @@ export class StandardInput extends LitElement {
     }
   `;
 
-  inputHandler(event: any) {
-    this.dispatchEvent(
-      new CustomEvent("val-change", {
-        detail: { value: event.composedPath()[0].value, name: this.name },
-      })
-    );
-  }
-
-  checkTemplate() {
-    if (this.error && this.value.length > 0) {
-      return html`
-        <div class="input-icon">
-          <error-icon
-            slot="icon-right"
-            size="small"
-            color="var(--colorStatusBackgroundErrorAccent)"
-          ></error-icon>
-        </div>
-        <span>${this.errorMessage}</span>
-      `;
-    } else if (!this.error && this.value.length > 0) {
-      return html`
-        <div class="input-icon">
-          <check-icon
-            slot="icon-right"
-            size="small"
-            color="var(--colorStatusContentSuccess)"
-          ></check-icon>
-        </div>
-      `;
-    } else {
-      return null;
+  inputHandler(event: Event): void {
+    if (event.target instanceof HTMLInputElement) {
+      const { name, value } = event.target;
+      this.dispatchEvent(
+        new CustomEvent("val-change", { detail: { name, value } })
+      );
     }
   }
 
+  checkTemplate() {
+    if (this.value.length > 0) {
+      const icon = this.error
+        ? html`
+            <error-icon
+              slot="icon-right"
+              size="small"
+              color="var(--colorStatusBackgroundErrorAccent)"
+            ></error-icon>
+          `
+        : html`
+            <check-icon
+              slot="icon-right"
+              size="small"
+              color="var(--colorStatusContentSuccess)"
+            ></check-icon>
+          `;
+
+      return html`
+        <div class="input-icon">${icon}</div>
+        ${this.error && this.value.length > 0
+          ? html`<span role="alert">${this.errorMessage}</span>`
+          : null}
+      `;
+    }
+    return null;
+  }
+
   protected render() {
-    console.log(this.error);
+    const borderColor =
+      this.error && this.value.length > 0
+        ? "var(--colorStatusContentError)"
+        : "var(--colorEditionBorderDefault)";
+    const labelColor =
+      this.error && this.value.length > 0
+        ? "var(--colorStatusContentError)"
+        : "var(--colorEditionContentDefault)";
+    const interactingBorderColor =
+      this.error && this.value.length > 0
+        ? "var(--colorStatusContentError)"
+        : "var(--colorEditionBorderInteracting)";
 
     return html`
       <style>
         :host {
-          --border: ${this.error && this.value.length > 0
-            ? "var(--colorStatusContentError)"
-            : "var(--colorEditionBorderDefault)"};
-          --label: ${this.error && this.value.length > 0
-            ? "var(--colorStatusContentError)"
-            : "var(--colorEditionContentDefault)"};
-          --interactingBorder: ${this.error && this.value.length > 0
-            ? "var(--colorStatusContentError)"
-            : "var(--colorEditionBorderInteracting)"};
+          --border: ${borderColor};
+          --label: ${labelColor};
+          --interactingBorder: ${interactingBorderColor};
         }
       </style>
       <div class="input-container">

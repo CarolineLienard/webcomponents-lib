@@ -1,25 +1,22 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 
 @customElement("standard-button")
 export class StandardButton extends LitElement {
-  // Component props
   @property({ type: String }) color =
     "var(--colorActionPrimaryBackgroundDefault)";
   @property({ type: String }) hoverColor =
     "var(--colorActionPrimaryBackgroundInteracting)";
-  @property({ type: String }) label = "Button";
-  @property({ type: String }) icon = "sendIcon";
+  @property({ type: String }) label? = "";
   @property({ type: Boolean }) isDisabled = false;
 
-  // Component style
   static styles = css`
     button {
       display: flex;
       align-items: center;
       gap: 6px;
       background-color: var(--color);
-      color: var(--font);
+      color: var(--colorActionPrimaryContentDefault);
       font-size: 14px;
       font-weight: 600;
       padding: 12px 16px;
@@ -29,33 +26,27 @@ export class StandardButton extends LitElement {
       cursor: pointer;
       transition: background-color 0.2s;
     }
-    button:hover {
+
+    button:hover,
+    button:focus {
       background-color: var(--hover-color);
       border: 1px solid var(--hover-color);
     }
-    button:focus {
-      background-color: var(--hover-color);
-      outline: none;
-    }
+
     button:disabled {
+      color: var(--colorGlobalAllDisabledStrong);
+      background-color: var(--colorGlobalAllDisabledSoft);
+      border: 1px solid var(--colorGlobalAllDisabledSoft);
       cursor: not-allowed;
     }
   `;
 
-  // Component render
   protected render() {
     return html`
       <style>
         :host {
-          --color: ${this.isDisabled
-            ? "var(--colorGlobalAllDisabledSoft)"
-            : this.color};
-          --hover-color: ${this.isDisabled
-            ? "var(--colorGlobalAllDisabledSoft)"
-            : this.hoverColor};
-          --font: ${this.isDisabled
-            ? "var(--colorGlobalAllDisabledStrong)"
-            : "var(--colorActionPrimaryContentDefault)"};
+          --color: ${this.color};
+          --hover-color: ${this.hoverColor};
         }
       </style>
       <button ?disabled=${this.isDisabled}>
