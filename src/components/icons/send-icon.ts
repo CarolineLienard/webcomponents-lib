@@ -1,38 +1,14 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, CSSResultArray } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { iconStyle } from "./icon-style";
 
 @customElement("send-icon")
 export class SendIcon extends LitElement {
   @property({ type: String }) size = "medium";
   @property({ type: String }) color =
-    "var(  --colorActionTertiaryContentDefault)";
+    "var(--colorActionTertiaryContentDefault)";
 
-  static styles = css`
-    :host {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    svg {
-      fill: currentColor;
-    }
-
-    .small {
-      width: 16px;
-      height: 16px;
-    }
-
-    .large {
-      width: 32px;
-      height: 32px;
-    }
-
-    .xlarge {
-      width: 48px;
-      height: 48px;
-    }
-  `;
+  static styles: CSSResultArray = [iconStyle];
 
   render() {
     return html`

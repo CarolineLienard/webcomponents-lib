@@ -1,36 +1,14 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, CSSResultArray } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { iconStyle } from "./icon-style";
 
 @customElement("check-icon")
 export class CheckIcon extends LitElement {
   @property({ type: String }) size = "medium";
   @property({ type: String }) color =
-    "var(  --colorActionTertiaryContentDefault)";
+    "var(--colorActionTertiaryContentDefault)";
 
-  static styles = css`
-    :host {
-      display: inline-block;
-    }
-
-    svg {
-      fill: currentColor;
-    }
-
-    .small {
-      width: 20px;
-      height: 20px;
-    }
-
-    .medium {
-      width: 32px;
-      height: 32px;
-    }
-
-    .xlarge {
-      width: 48px;
-      height: 48px;
-    }
-  `;
+  static styles: CSSResultArray = [iconStyle];
 
   render() {
     return html`

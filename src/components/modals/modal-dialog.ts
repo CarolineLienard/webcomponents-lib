@@ -24,6 +24,7 @@ export class ModalDialog extends LitElement {
       z-index: 1;
       visibility: var(--open);
     }
+
     .modal {
       padding: 30px;
       background-color: white;
@@ -33,23 +34,27 @@ export class ModalDialog extends LitElement {
       flex-direction: column;
       gap: 1rem;
     }
+
     .modal-title {
       position: relative;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
+
     .close-button {
       position: absolute;
       left: 94%;
       bottom: 75%;
     }
+
     h1 {
       font-size: 18px;
       font-weight: 600;
       color: var(--colorNeutralContentStrong);
       margin: 0;
     }
+    
     p {
       font-size: 16px;
       font-weight: 400;

@@ -51,7 +51,6 @@ export class StandardInput extends LitElement {
     }
 
     label {
-      font-family: "Inter";
       position: absolute;
       top: 7px;
       left: 8px;
