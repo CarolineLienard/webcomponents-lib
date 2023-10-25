@@ -1,55 +1,50 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 @customElement("outline-button")
 export class OutlineButton extends LitElement {
-  // Component props
+  @property({ type: String }) label? = "";
+  @property({ type: Boolean }) isDisabled = false;
 
-  @property({ type: String }) color =
-    "var(--colorActionSecondaryBorderDefault)";
-  @property({ type: String }) hoverColor =
-    "var(--colorActionSecondaryBackgroundInteracting)";
-  @property({ type: String }) label = "Button";
-
-  @state()
-  _disabled = false;
-
-  // Component style
   static styles = css`
     button {
-      background-color: transparent;
-      color: var(--font);
-      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      background-color: var(--colorActionSecondaryBackgroundDefault);
+      color: var(--colorActionSecondaryContentDefault);
+      font-size: 0.875rem;
       font-weight: 600;
-      padding: 12px 16px;
+      padding: 0.75rem 1rem;
       border-radius: 8px;
-      border: 1px solid var(--outline);
+      border: 1px solid var(--colorActionSecondaryBorderDefault);
       letter-spacing: 0.02rem;
       cursor: pointer;
       transition: background-color 0.2s;
     }
-    button:hover {
-      background-color: var(--hover-color);
-    }
+
+    button:hover,
     button:focus {
-      border: 1px solid var(--colorEditionBorderInteracting);
-      background-color: var(--hover-color);
+      color: var(--colorActionSecondaryContentInteracting);
+      background-color: var(--colorActionSecondaryBackgroundInteracting);
+      border: 1px solid var(--colorActionSecondaryBorderInteracting);
       outline: none;
+    }
+
+    button:disabled {
+      color: var(--colorGlobalAllDisabledStrong);
+      background-color: var(--colorGlobalAllDisabledSoft);
+      border: 1px solid var(--colorGlobalAllDisabledSoft);
+      cursor: not-allowed;
     }
   `;
 
-  // Component render
   protected render() {
     return html`
-      <style>
-        :host {
-          --outline: ${this._disabled ? "red" : this.color};
-          --hover-color: ${this._disabled ? "lightGrey" : this.hoverColor};
-          --font: ${this._disabled
-            ? "var(--colorGlobalAllDisabledStrong)"
-            : "var(--colorActionSecondaryContentDefault)"};
-        }
-      </style>
-      <button>${this.label}</button>
+      <button ?disabled=${this.isDisabled}>
+        <slot name="icon-left"></slot>
+        ${this.label}
+        <slot name="icon-right"></slot>
+      </button>
     `;
   }
 }

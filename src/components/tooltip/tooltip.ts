@@ -20,10 +20,10 @@ export class TooltipComponent extends LitElement {
       background-color: var(--colorNeutralBackgroundMedium);
       color: var(--colorNeutralContentMedium);
       border: 1px solid var(--colorNeutralBorderMedium);
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 500;
       border-radius: 4px;
-      padding: 6px 8px;
+      padding: 0.375rem 0.5rem;
       white-space: nowrap;
     }
   `;

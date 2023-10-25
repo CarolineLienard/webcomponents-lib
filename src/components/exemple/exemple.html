@@ -1,0 +1,31 @@
+// Exemple d'une page html qui appellerait modal-dialog.js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="modal-dialog.js"></script>
+  </head>
+  <body>
+    <button id="openButton">Open Modal</button>
+    <modal-dialog id="modal" headline="Example Modal">
+      <p>This is the modal content.</p>
+    </modal-dialog>
+    <script>
+      // Récupérer les références des éléments HTML
+      const openButton = document.getElementById("openButton");
+      const modal = document.getElementById("modal");
+
+      // Ajouter un gestionnaire d'événement au bouton d'ouverture
+      openButton.addEventListener("click", () => {
+        modal.setAttribute("subtitle", "Subtitle text");
+        modal._handleOpen(); // Appeler la méthode _handleOpen pour afficher le modal
+      });
+
+      // Ajouter un gestionnaire d'événement pour gérer la fermeture du modal
+      modal.addEventListener("handleClose", () => {
+        modal._handleClose(); // Appeler la méthode _handleClose pour fermer le modal
+      });
+    </script>
+  </body>
+</html>

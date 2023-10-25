@@ -25,12 +25,12 @@ export class UserForm extends LitElement {
     .userFormContainer {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 1.5rem;
     }
     .userForm {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 1rem;
     }
     .buttons {
       display: flex;
@@ -79,8 +79,13 @@ export class UserForm extends LitElement {
   }
 
   handleSubmit() {
-    this.handleClose();
     this.isSubmitted = true;
+    this.handleClose();
+    this.dispatchEvent(
+      new CustomEvent("form-submitted", {
+        detail: { isSubmitted: this.isSubmitted, name: this.nameValue },
+      })
+    );
   }
 
   handleClose() {
@@ -97,16 +102,23 @@ export class UserForm extends LitElement {
     );
   }
 
+  resetForm() {
+    this.emailValue = "";
+    this.nameValue = "";
+    this.numberValue = "";
+    this.isSubmitted = false;
+  }
+
   render() {
     return html`
-      <form class="userFormContainer">
+      <form class="userFormContainer" @reset-form="${this.resetForm}">
         <div class="userForm">
           <standard-input
             id="nameInput"
             name="firstName"
-            label="Name"
+            label="Prénom"
             type="text"
-            placeholder="Example: John Doe"
+            placeholder="Exemple: John Doe"
             required
             @val-change="${this.handleChange}"
             .value=${this.nameValue}
@@ -117,8 +129,8 @@ export class UserForm extends LitElement {
             id="email"
             name="email"
             label="Email"
-            type="text"
-            placeholder="Example: john.doe@example.com"
+            type="email"
+            placeholder="Exemple: john.doe@exemple.com"
             required
             @val-change="${this.handleChange}"
             .value=${this.emailValue}
@@ -128,8 +140,8 @@ export class UserForm extends LitElement {
           <standard-input
             id="numberInput"
             name="number"
-            label="Favorite number"
-            placeholder="Example: 8"
+            label="Chiffre préféré"
+            placeholder="Exemple: 8"
             type="text"
             @val-change="${this.handleChange}"
             .value=${this.numberValue}
@@ -138,26 +150,24 @@ export class UserForm extends LitElement {
           ></standard-input>
         </div>
         <div class="buttons">
-          <outline-button label="Cancel" id="cancel-button" @click="${
-            this.handleClose
-          }"></outline-button>
-          <standard-button ?isDisabled=${this.handleDisabled()} type="submit" id="close-modal-button" label="Send" aria-label="Valider le formulaire" @click="${
-      this.handleSubmit
-    }">
-            <send-icon slot="icon-right" size="small" color=${
-              this.handleDisabled()
-                ? "var(--colorGlobalAllDisabledStrong)"
-                : "var(--colorActionPrimaryContentInteracting)"
-            }></send-icon>
+          <outline-button label="Fermer" @click="${this.handleClose}">
+          </outline-button>
+          <standard-button
+            ?isDisabled=${this.handleDisabled()} 
+            type="submit"
+            label="Envoyer"
+            @click="${this.handleSubmit}"  
+            aria-label="Envoyer le formulaire">
+            <send-icon
+              slot="icon-right" 
+              size="small" 
+              color=${
+                this.handleDisabled()
+                  ? "var(--colorGlobalAllDisabledStrong)"
+                  : "var(--colorActionPrimaryContentInteracting)"
+              }></send-icon>
           </standard-button>
         </div>
-        <modal-dialog title="Merci pour votre inscription ${
-          this.nameValue
-        }" subtitle="un email de confirmation a été envoyé à ${
-      this.emailValue
-    }" ?isOpen=${this.isSubmitted}>
-          <outline-button label="Cancel" aria-label="Cancel form"></outline-button>
-        </modal-dialog>
       </div>
     `;
   }

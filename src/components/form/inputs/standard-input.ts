@@ -5,6 +5,7 @@ import "../../icons/error-icon";
 
 @customElement("standard-input")
 export class StandardInput extends LitElement {
+  @property({ type: String }) id = "";
   @property({ type: String }) name = "";
   @property({ type: String }) value = "";
   @property({ type: String }) label = "Label";
@@ -30,10 +31,10 @@ export class StandardInput extends LitElement {
 
     input {
       background-color: var(--input-background-color);
-      padding: 21.5px 35px 6px 8px;
+      padding: 1.4rem 2rem 0.5rem 0.5rem;
       border: 1px solid var(--input-border);
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 400;
       color: var(--input-color);
       width: 100%;
@@ -52,9 +53,9 @@ export class StandardInput extends LitElement {
 
     label {
       position: absolute;
-      top: 7px;
-      left: 8px;
-      font-size: 14px;
+      top: 0.3rem;
+      left: 0.56rem;
+      font-size: 0.875rem;
       font-weight: 500;
       color: var(--label-color);
     }
@@ -66,7 +67,7 @@ export class StandardInput extends LitElement {
 
     span {
       display: block;
-      font-size: 14px;
+      font-size: 0.875rem;
       color: var(--error-color);
       font-weight: 400;
       font-style: italic;
@@ -76,12 +77,12 @@ export class StandardInput extends LitElement {
     .input-icon {
       background-color: white;
       position: absolute;
-      top: 14px;
-      right: 8px;
+      top: 0.875rem;
+      right: 0.5rem;
     }
   `;
 
-  inputHandler(event: Event): void {
+  private inputHandler(event: Event): void {
     if (event.target instanceof HTMLInputElement) {
       const { name, value } = event.target;
       this.dispatchEvent(
@@ -90,7 +91,7 @@ export class StandardInput extends LitElement {
     }
   }
 
-  checkTemplate() {
+  private checkTemplate() {
     if (this.value.length > 0) {
       const icon = this.error
         ? html`
@@ -147,7 +148,7 @@ export class StandardInput extends LitElement {
           placeholder="${this.placeholder}"
           .value=${this.value}
         />
-        <label for="input">${this.label}${this.required ? "*" : ""}</label>
+        <label>${this.label}${this.required ? "*" : ""}</label>
         ${this.checkTemplate()}
       </div>
     `;

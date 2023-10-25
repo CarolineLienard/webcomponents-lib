@@ -8,7 +8,6 @@ import "../tooltip/tooltip";
 export class ModalDialog extends LitElement {
   @property({ type: String }) headline = "Headline";
   @property({ type: String }) subtitle = "Your text here";
-  @property({ type: Boolean }) isOpen: boolean = false;
 
   static styles = css`
     .modal-container {
@@ -22,14 +21,13 @@ export class ModalDialog extends LitElement {
       justify-content: center;
       align-items: center;
       z-index: 1;
-      visibility: var(--open);
     }
 
     .modal {
-      padding: 30px;
-      background-color: white;
+      padding: 1.875rem;
+      background-color: var(--colorNeutralBackgroundStrong);
       border-radius: 16px;
-      width: 440px;
+      width: 27.5rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -39,28 +37,28 @@ export class ModalDialog extends LitElement {
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 0.75rem;
     }
 
     .close-button {
       position: absolute;
-      left: 94%;
-      bottom: 75%;
+      left: 95%;
+      bottom: 80%;
     }
 
     h1 {
-      font-size: 18px;
+      font-size: 1.125rem;
       font-weight: 600;
       color: var(--colorNeutralContentStrong);
       margin: 0;
     }
-    
+
     p {
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 400;
       color: var(--colorNeutralContentMedium);
       margin: 0;
-      line-height: 24px;
+      line-height: 1.5rem;
     }
   `;
 
@@ -70,15 +68,10 @@ export class ModalDialog extends LitElement {
 
   render() {
     return html`
-      <style>
-        :host {
-          --open: ${this.isOpen ? "visible" : "hidden"};
-        }
-      </style>
       <div class="modal-container">
         <div class="modal">
           <div class="modal-title">
-            <tooltip-component class="close-button" text="Close">
+            <tooltip-component class="close-button" text="Fermer">
               <icon-button @click="${this._handleClose}">
                 <cross-icon size="small"></cross-icon>
               </icon-button>
